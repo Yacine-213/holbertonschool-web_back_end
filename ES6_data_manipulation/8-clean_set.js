@@ -1,13 +1,10 @@
 export default function cleanSet(set, startString) {
-  // Vérification de la validité de startString
-  if (!startString || typeof startString !== 'string') {
-    return '';
+  if (!startString || typeof startString !== 'string') return '';
+  let result = '';
+  for (const item of set) {
+    if (typeof item === 'string' && item.startsWith(startString)) {
+      result += `${item.slice(startString.length)}-`;
+    }
   }
-
-  // Filtrer les valeurs du Set et construire le résultat
-  return Array.from(set)
-    .filter((value) => typeof value === 'string' && value.startsWith(startString))
-    .map((value) => value.slice(startString.length))
-    .join('-');
+  return result.slice(0, -1);
 }
-
